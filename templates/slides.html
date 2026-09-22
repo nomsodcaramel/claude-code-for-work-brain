@@ -1,0 +1,93 @@
+<!--
+  แม่แบบสไลด์ · ส่วนจำตัวตั้งต้น
+  สำหรับ Claude (skill /meeting-slide):
+  1. คัดลอกไฟล์นี้เป็น slides/<วันที่>-<หัวข้อ>.html แล้วแก้ในไฟล์ใหม่ ห้ามแก้แม่แบบ
+  2. เขียนเกณฑ์จาก "เอ๊ะ ก่อน" ไว้ในคอมเมนต์ข้างล่าง (บรรทัดของผู้ใช้ · ให้ใครดู · ต้องตอบอะไรบ้าง)
+  3. หนึ่งหน้า = หนึ่งเรื่อง หัวข้อเป็นประโยคที่ตอบคำถามของผู้ใช้ ไม่เกิน 8 หน้ารวมปก
+  4. ใช้ได้ 4 แบบ: s-cover (ปก) · s-point (หนึ่งประเด็น) · s-table (ตาราง ใครทำอะไร) · s-next (ปิด ขั้นต่อไป)
+  5. ลบหน้าตัวอย่างที่ไม่ใช้ออก เปลี่ยนสีหลักได้ที่ --accent
+  6. ก่อนเผยแพร่ ตัดชื่อจริง เบอร์โทร ข้อมูลลูกค้าจริงออก (ลิงก์บน Pro เป็นลิงก์สาธารณะ)
+
+  เกณฑ์ (จากเอ๊ะ ก่อน):
+  บรรทัดของผู้ใช้: <ที่ผู้ใช้พิมพ์เอง>
+  ให้ใครดู: <คำตอบข้อ 1>
+  ต้องตอบ: <คำตอบข้อ 2 ข้อละบรรทัด>
+-->
+<title>ชื่อเรื่องของสไลด์</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600;700&display=swap">
+<style>
+:root{
+  --bg:#F4F4F2;--card:#FFFFFF;--ink:#1D1F24;--text:#3D4049;--mut:#6B6F78;--line:#DCDDE0;
+  --accent:#2F6FEB;--accent-soft:#E6EEFD;
+  --font:"IBM Plex Sans Thai",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#15171B;--card:#1F2227;--ink:#F2F3F5;--text:#CDD0D6;--mut:#9A9FA8;--line:#353940;--accent:#7EA6F7;--accent-soft:#223252}
+}
+:root[data-theme="dark"]{--bg:#15171B;--card:#1F2227;--ink:#F2F3F5;--text:#CDD0D6;--mut:#9A9FA8;--line:#353940;--accent:#7EA6F7;--accent-soft:#223252}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;padding-block:24px;padding-inline:16px}
+.deck{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+.s{background:var(--card);border:1px solid var(--line);border-radius:16px;aspect-ratio:16/9;padding:6% 7%;
+   display:flex;flex-direction:column;justify-content:center;gap:1.2em;position:relative;overflow:hidden;scroll-margin-top:16px}
+.s .no{position:absolute;right:4%;bottom:5%;font-size:14px;color:var(--mut);font-variant-numeric:tabular-nums}
+.tag{align-self:flex-start;font-size:15px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.2em .9em}
+h1,h2{margin:0;color:var(--ink);font-weight:700;text-wrap:balance;line-height:1.3}
+h1{font-size:clamp(28px,5.2vw,54px)}
+h2{font-size:clamp(22px,3.6vw,38px)}
+p{margin:0;font-size:clamp(16px,2.1vw,22px);max-width:40em}
+.lines{display:flex;flex-direction:column;gap:.6em;font-size:clamp(16px,2.1vw,22px)}
+.lines div{padding-left:.9em;border-left:4px solid var(--accent)}
+.wait{color:var(--mut)}
+table{border-collapse:collapse;width:100%;font-size:clamp(14px,1.9vw,20px)}
+th,td{text-align:left;padding:.5em .6em;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600}
+.tw{overflow-x:auto}
+.s-cover{background:var(--accent-soft)}
+.s-cover .tag{background:var(--card)}
+.s-next h2{color:var(--accent)}
+@media (max-width:640px){.s{aspect-ratio:auto;min-height:56vw;padding:28px 22px}}
+</style>
+
+<main class="deck">
+
+  <!-- ปก: หัวเรื่อง + ให้ใคร + วันที่ -->
+  <section class="s s-cover" id="s1">
+    <span class="tag">ให้ใครดู</span>
+    <h1>หัวเรื่องเป็นประโยคเดียว ที่คนดูอยากรู้</h1>
+    <p>วันที่ · ทีมของเรา</p>
+    <span class="no">1</span>
+  </section>
+
+  <!-- หนึ่งประเด็น: หัวข้อตอบคำถามหนึ่งข้อ ใต้หัวข้อไม่เกิน 3 บรรทัดสั้น -->
+  <section class="s s-point" id="s2">
+    <span class="tag">คำถามที่หน้านี้ตอบ</span>
+    <h2>หัวข้อเป็นประโยคที่ตอบคำถามนั้น</h2>
+    <div class="lines">
+      <div>บรรทัดสั้นที่ 1</div>
+      <div>บรรทัดสั้นที่ 2</div>
+      <div class="wait">เรื่องที่ยังไม่ตัดสิน เขียนว่า รอประกาศ</div>
+    </div>
+    <span class="no">2</span>
+  </section>
+
+  <!-- ตาราง: ใครทำอะไร เมื่อไร -->
+  <section class="s s-table" id="s3">
+    <span class="tag">ใครทำอะไร</span>
+    <h2>หัวข้อของตาราง</h2>
+    <div class="tw"><table>
+      <tr><th>ใคร</th><th>ทำอะไร</th><th>เมื่อไร</th></tr>
+      <tr><td>บทบาท</td><td>งาน</td><td>วัน</td></tr>
+    </table></div>
+    <span class="no">3</span>
+  </section>
+
+  <!-- ปิด: ขั้นต่อไปหนึ่งอย่าง -->
+  <section class="s s-next" id="s4">
+    <span class="tag">ขั้นต่อไป</span>
+    <h2>สิ่งเดียวที่อยากให้คนดูทำต่อ</h2>
+    <p>วัน เวลา หรือช่องทาง</p>
+    <span class="no">4</span>
+  </section>
+
+</main>
