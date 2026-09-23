@@ -34,6 +34,7 @@ Claude อ่านไฟล์นี้ก่อนทุกครั้งท�
 | `templates/slides.html` | แม่แบบสไลด์ |
 | `sample/meeting-transcript.md` | transcript ประชุม 35 นาที ตัวอย่างสมมติ ไว้ฝึก |
 | `.claude/skills/` | วิธีทำงานที่เก็บไว้ใช้ซ้ำ: `/meeting-slide` transcript ประชุม เป็นสไลด์สรุปพร้อมลิงก์ |
+| `docs/` | คู่มือติดตั้ง Claude Code · ส่วนจำ · Connectors สำหรับคน ไม่ต้องแก้ |
 
 ## ถ้าเพิ่งติดตั้งเสร็จ
 
