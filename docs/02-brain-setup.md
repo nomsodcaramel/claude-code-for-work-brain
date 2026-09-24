@@ -65,6 +65,8 @@ skill คือ prompt ที่เก็บไว้ใช้ซ้ำ อย�
 3. อ่านไฟล์ `SKILL.md` ที่ได้ ตรงไหนไม่ใช่ แก้หรือสั่งให้แก้
 4. เปิด session ใหม่ แล้วพิมพ์ `/weekly-report`
 
+ใช้ไปสักพัก อ่านต่อ [4 · ใช้ส่วนจำทุกวัน](04-brain-day-to-day.md): จดเพิ่มตอนไหน แก้ยังไง เรียกใช้ให้ถูกงาน
+
 ---
 ที่มา: [How Claude remembers your project](https://code.claude.com/docs/en/memory) ·
 [Skills](https://code.claude.com/docs/en/skills) · อ่านเมื่อ 23 ก.ย. 2569

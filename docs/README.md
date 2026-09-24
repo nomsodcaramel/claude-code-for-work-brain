@@ -7,6 +7,7 @@
 | 1 | [ติดตั้ง Claude Code](01-setup-claude-code.md) | แอป Claude บนคอมเรา เปิดฝั่ง Code แล้วสั่งงานกับไฟล์ในโฟลเดอร์ได้ |
 | 2 | [ติดตั้งส่วนจำ (Brain)](02-brain-setup.md) | Claude จำทีม คนที่เราทำงานให้ และเรื่องที่ตัดสินไปแล้ว มี `/meeting-slide` ใช้ |
 | 3 | [ต่อ Connectors](03-connectors.md) | Claude ใช้ปฏิทิน Notion Slack ฯลฯ ของเราได้ (ไม่บังคับ) |
+| 4 | [ใช้ส่วนจำทุกวัน](04-brain-day-to-day.md) | จดเพิ่มตอนไหน แก้ยังไง เรียกใช้ให้ถูกงาน ถูกโฟลเดอร์ |
 
 **ฉบับหน้าเดียวสำหรับพิมพ์ A4:** [setup-claude-code-a4.pdf](setup-claude-code-a4.pdf)
 (ต้นฉบับ [setup-claude-code-a4.html](setup-claude-code-a4.html))
