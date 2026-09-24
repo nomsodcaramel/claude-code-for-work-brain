@@ -1,11 +1,15 @@
+<meta charset="utf-8">
 <title>ติดตั้ง Claude Code</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700&family=Inter:wght@500;700&family=Kanit:wght@300;400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 /* One A4 page for the adult room (Claude Code for Work, 29 Sep 2026): install the Claude app, open the Code tab,
-   pick a folder, check it answers; then the brain and connectors. BSD CI from core/brand/brand.md; the deck's tokens.
+   pick a folder, check it answers. BSD CI from core/brand/brand.md; the deck's tokens.
    Facts from code.claude.com/docs (desktop-quickstart, desktop, mcp, setup), read 23 Sep 2026.
+   24 Sep, First's comments: it reaches people by email, so links are clickable and there is no QR; the brain and the
+   connectors are taught in class, so they left this sheet; the app now shows two sides, chat (Cowork merged in) on the
+   left and Code on the right; a picture beside each step. The pictures are redrawn, never screenshots: 20 laptops differ.
    A paper sheet: one light look on purpose, painted explicitly so it holds on a dark host. */
 :root{
   --paper:#FFFFFF;--desk:#EEEAE3;--ink:#2A2620;--text:#51545F;--mut:#7B7E86;
@@ -25,6 +29,7 @@ b,strong{font-weight:500;color:var(--ink)}
 .say{font-weight:400;color:var(--ink);background:linear-gradient(transparent 58%, var(--marker) 58%);padding:0 .12em}
 code,.url{font-family:var(--fm);font-weight:500;font-size:.86em;color:var(--ink);white-space:nowrap}
 .url.wrap{white-space:normal}
+a{color:inherit;text-decoration:underline;text-decoration-color:var(--teal);text-decoration-thickness:1.5px;text-underline-offset:2px}
 
 /* head */
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -40,14 +45,17 @@ h1 .o{background:linear-gradient(transparent 64%, var(--yellow) 64%);padding:0 .
 .need span.c{border:1px solid var(--line2);border-radius:99px;padding:.5mm 3mm;background:var(--paper)}
 
 /* body grid */
-.grid{display:grid;grid-template-columns:1.35fr 1fr;gap:6mm;align-items:start}
+.grid{display:block}
 .lab{margin:0 0 2.5mm;font-family:var(--fe);font-weight:700;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-d)}
 .lab .th{font-family:var(--fb);font-weight:500;letter-spacing:0;text-transform:none;color:var(--ink);font-size:13px;margin-left:1.5mm}
+.lab .nt{font-family:var(--fb);font-weight:300;letter-spacing:0;text-transform:none;color:var(--mut);font-size:11px;margin-left:2mm}
 
 /* steps: a real sequence, so numbered, on one teal rail */
 ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4mm;position:relative}
 ol.steps::before{content:"";position:absolute;left:3.4mm;top:3mm;bottom:3mm;width:2px;background:var(--teal)}
-ol.steps li{position:relative;padding-left:10.5mm;font-size:13px;line-height:1.55}
+ol.steps li{position:relative;padding-left:10.5mm;font-size:13px;line-height:1.55;display:grid;grid-template-columns:1fr 46mm;gap:0 6mm;align-items:start}
+ol.steps li > div{min-width:0}
+ol.steps li .scr{width:46mm;height:auto;display:block}
 ol.steps li .n{position:absolute;left:0;top:0;width:7mm;height:7mm;border-radius:50%;background:var(--teal);color:#fff;
   font-family:var(--fe);font-weight:700;font-size:12px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
 ol.steps li.done .n{background:var(--ink)}
@@ -57,27 +65,12 @@ ol.steps li .os{display:grid;grid-template-columns:auto 1fr;gap:.3mm 2mm;margin-
 ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:var(--mut);padding-top:.5mm}
 .modes{display:grid;gap:.6mm;margin-top:1mm}
 
-/* right column */
-.side{display:flex;flex-direction:column;gap:4mm}
-.box{border:1px solid var(--line2);border-radius:5px;padding:3.2mm 3.6mm;font-size:12px;line-height:1.5}
-.box p{margin:0}
-.box ol{margin:1mm 0 0;padding-left:4.2mm;display:grid;gap:.8mm}
-.qr{display:grid;grid-template-columns:22mm 1fr;gap:3mm;align-items:center}
-.qr svg{width:22mm;height:22mm;display:block}
-.qr .t{font-size:12px}
-.qr .url{display:block;font-size:11px;margin-top:.5mm}
-.box.opt{background:var(--teal-p);border-color:transparent}
-.box .lab{margin-bottom:1.6mm}
-.warn{font-size:11px;color:var(--text);margin-top:1.4mm !important}
 
 /* stuck */
 .stuck{border-top:1px solid var(--line2);padding-top:3mm}
 .stuck .rows{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}
 .stuck .row{font-size:11.5px;line-height:1.45}
 .stuck .row b{display:block;font-weight:500;font-size:12px}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1mm 6mm;font-size:10.5px;color:var(--mut);border-top:1px solid var(--line);padding-top:2.2mm}
-.foot .pv{color:var(--text)}
-.foot .pv b{color:var(--coral);font-weight:500}
 
 @media (max-width:640px){
   body{padding-block:12px}
@@ -85,10 +78,9 @@ ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:v
   .hero{grid-template-columns:1fr 64px;gap:10px}
   .hero .owl{width:64px;margin-bottom:-8px}
   h1{font-size:26px}
-  .grid{grid-template-columns:1fr;gap:18px}
+  ol.steps li{grid-template-columns:1fr;gap:8px}
+  ol.steps li .scr{width:100%;max-width:240px}
   .stuck .rows{grid-template-columns:1fr;gap:10px}
-  .qr{grid-template-columns:84px 1fr}
-  .qr svg{width:84px;height:84px}
 }
 @page{size:A4 portrait;margin:0}
 @media print{
@@ -120,71 +112,51 @@ ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:v
 
   <div class="grid">
     <section>
-      <h2 class="lab">Setup<span class="th">6 ขั้น</span></h2>
+      <h2 class="lab">Setup<span class="th">6 ขั้น</span><span class="nt">ภาพเป็นภาพวาด จอจริงอาจต่างเล็กน้อย</span></h2>
       <ol class="steps">
-        <li><span class="n">1</span>
+        <li><span class="n">1</span><div>
           <h3>ดาวน์โหลดแอป Claude</h3>
-          <p>เข้า <span class="url">claude.com/download</span> (สแกน QR ด้านขวาก็ได้)</p>
+          <p>กดลิงก์ <a class="url" href="https://claude.com/download">claude.com/download</a></p>
           <div class="os"><b>Mac</b><span>เปิดไฟล์ที่โหลดมา แล้วย้าย Claude เข้าโฟลเดอร์ Applications</span>
-            <b>Win</b><span>เปิดไฟล์ติดตั้ง กดตามขั้นตอน และควรลง Git for Windows ด้วย <span class="url wrap">git-scm.com/downloads/win</span></span></div>
+            <b>Win</b><span>เปิดไฟล์ติดตั้ง กดตามขั้นตอน และควรลง Git for Windows ด้วย <a class="url" href="https://git-scm.com/downloads/win">git-scm.com/downloads/win</a></span></div>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="หน้าเว็บ claude.com/download มีปุ่ม Download"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="36" y="4" width="110" height="11" rx="5.5" fill="#EEEAE3"/><text x="91" y="12.3" font-size="8" font-family="IBM Plex Mono,monospace" fill="#2A2620" text-anchor="middle">claude.com/download</text><text x="90" y="44" font-size="11" font-weight="500" font-family="Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">ดาวน์โหลดแอป Claude</text><rect x="45" y="54" width="90" height="24" rx="12" fill="#00C4BA"/><text x="90" y="70" font-size="11" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#fff" text-anchor="middle">Download</text></svg>
         </li>
-        <li><span class="n">2</span>
+        <li><span class="n">2</span><div>
           <h3>เปิดแอป แล้ว Sign in ด้วยบัญชี Claude ของเรา</h3>
           <p>Mac เปิดจาก Applications · Windows เปิดจาก Start menu</p>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="หน้า Sign in ของแอป"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="35" y="30" width="110" height="18" rx="4" fill="#fff" stroke="rgba(42,38,32,.28)"/><text x="42" y="43" font-size="10" font-family="Kanit,system-ui,sans-serif" fill="#7B7E86">อีเมลของเรา</text><rect x="35" y="56" width="110" height="22" rx="11" fill="#2A2620"/><text x="90" y="71" font-size="11" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#fff" text-anchor="middle">Sign in</text></svg>
         </li>
-        <li><span class="n">3</span>
-          <h3>กดแท็บ <span class="ui">Code</span> ด้านบนตรงกลาง</h3>
-          <p>ในแอปมี 3 แท็บ: Chat · Cowork · Code วันนี้เราใช้ <b>Code</b> เพราะทำงานกับไฟล์ในคอมเราได้</p>
+        <li><span class="n">3</span><div>
+          <h3>ด้านบนของแอป กด <span class="ui">Code</span> ฝั่งขวา</h3>
+          <p>แอปมีสองฝั่ง: ซ้ายคือแชท (รวม Cowork แล้ว) ขวาคือ Code วันนี้เราใช้ <b>Code</b> เพราะทำงานกับไฟล์ในคอมเราได้</p>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="ด้านบนของแอปมีสองฝั่ง ซ้ายแชท ขวา Code กดฝั่ง Code"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="30" y="26" width="120" height="24" rx="12" fill="#EEEAE3"/><text x="60" y="42" font-size="11" font-weight="500" font-family="Inter,Kanit,system-ui,sans-serif" fill="#51545F" text-anchor="middle">Chat</text><rect x="91" y="28" width="57" height="20" rx="10" fill="#00C4BA"/><text x="119.5" y="42" font-size="11" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#fff" text-anchor="middle">Code</text><text x="58" y="68" font-size="9.5" font-family="Kanit,system-ui,sans-serif" fill="#7B7E86" text-anchor="middle">แชท + Cowork</text><text x="120" y="68" font-size="9.5" font-weight="500" font-family="Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">ทำงานกับไฟล์</text></svg>
         </li>
-        <li><span class="n">4</span>
+        <li><span class="n">4</span><div>
           <h3>เลือก <span class="ui">Local</span> แล้วกด <span class="ui">Select folder</span></h3>
           <p>เลือกโฟลเดอร์ที่จะทำงาน สร้างโฟลเดอร์ว่างไว้ก่อนหนึ่งอัน เช่น <code>claude-brain</code></p>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="เลือก Local แล้วกด Select folder เลือกโฟลเดอร์ claude-brain"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="14" y="30" width="44" height="20" rx="10" fill="#EFF9F8" stroke="#00C4BA"/><text x="36" y="44" font-size="10.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">Local</text><rect x="66" y="30" width="100" height="20" rx="10" fill="#2A2620"/><text x="116" y="44" font-size="10.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#fff" text-anchor="middle">Select folder</text><path d="M34 62h10l3 3h17v16H34z" fill="#EFF9F8" stroke="#00C4BA" stroke-linejoin="round"/><text x="72" y="76" font-size="10.5" font-family="IBM Plex Mono,monospace" fill="#2A2620">claude-brain</text></svg>
         </li>
-        <li><span class="n">5</span>
+        <li><span class="n">5</span><div>
           <h3>ดูปุ่มข้างปุ่มส่ง: เลือก model และโหมด</h3>
           <div class="modes">
             <span><span class="ui">Manual</span> ถามเราก่อนแก้ไฟล์หรือรันคำสั่งทุกครั้ง</span>
             <span><span class="ui">Accept edits</span> แก้ไฟล์ได้เลย เราดูทีหลังตรงตัวเลข <code>+12 -1</code></span>
           </div>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="ช่องพิมพ์ มีปุ่มเลือก model และโหมด อยู่ข้างปุ่มส่ง"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="10" y="30" width="160" height="56" rx="8" fill="#fff" stroke="rgba(42,38,32,.28)"/><text x="18" y="47" font-size="10" font-family="Kanit,system-ui,sans-serif" fill="#7B7E86">พิมพ์งานที่อยากให้ทำ</text><rect x="46" y="64" width="54" height="15" rx="7.5" fill="#EFF9F8" stroke="#00C4BA"/><text x="73" y="74.8" font-size="8.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">Opus 5.5 ▾</text><rect x="104" y="64" width="44" height="15" rx="7.5" fill="#EFF9F8" stroke="#00C4BA"/><text x="126" y="74.8" font-size="8.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">Manual ▾</text><circle cx="159" cy="71.5" r="6.5" fill="#00C4BA"/><path d="M159 75v-7m-3 3 3-3 3 3" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </li>
-        <li class="done"><span class="n">6</span>
+        <li class="done"><span class="n">6</span><div>
           <h3>ลองพิมพ์ <span class="say">ในโฟลเดอร์นี้มีไฟล์อะไรบ้าง</span> แล้วกด Enter</h3>
           <p>Claude ตอบกลับมา = ติดตั้งเสร็จ พร้อมใช้</p>
+        </div>
+          <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="พิมพ์ถามว่าในโฟลเดอร์นี้มีไฟล์อะไรบ้าง แล้ว Claude ตอบกลับมา"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="40" y="26" width="130" height="20" rx="10" fill="#EFF9F8"/><text x="105" y="40" font-size="9.5" font-family="Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">ในโฟลเดอร์นี้มีไฟล์อะไรบ้าง</text><circle cx="17" cy="60" r="5.5" fill="#2A2620"/><rect x="28" y="55" width="112" height="6" rx="3" fill="#EEEAE3"/><rect x="28" y="66" width="80" height="6" rx="3" fill="#EEEAE3"/><text x="28" y="87" font-size="10" font-weight="500" font-family="Kanit,system-ui,sans-serif" fill="#0B746D">ตอบกลับมา = พร้อมใช้</text></svg>
         </li>
       </ol>
     </section>
-
-    <aside class="side">
-      <div class="box qr">
-        <svg aria-label="QR ไป claude.com/download" viewBox="0 0 29 29" role="img"><path fill="#FFFFFF" d="M0,0 h29v29H0z" shape-rendering="crispEdges"></path><path fill="#2A2620" d="M0 0h7v1H0zM10 0h1v1H10zM12 0h2v1H12zM16 0h5v1H16zM22,0 h7v1H22zM0 1h1v1H0zM6 1h1v1H6zM8 1h1v1H8zM10 1h2v1H10zM15 1h2v1H15zM18 1h3v1H18zM22 1h1v1H22zM28,1 h1v1H28zM0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM9 2h6v1H9zM16 2h1v1H16zM19 2h2v1H19zM22 2h1v1H22zM24 2h3v1H24zM28,2 h1v1H28zM0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h1v1H8zM10 3h1v1H10zM13 3h1v1H13zM15 3h1v1H15zM17 3h1v1H17zM20 3h1v1H20zM22 3h1v1H22zM24 3h3v1H24zM28,3 h1v1H28zM0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM8 4h1v1H8zM10 4h2v1H10zM14 4h3v1H14zM19 4h1v1H19zM22 4h1v1H22zM24 4h3v1H24zM28,4 h1v1H28zM0 5h1v1H0zM6 5h1v1H6zM9 5h1v1H9zM13 5h2v1H13zM22 5h1v1H22zM28,5 h1v1H28zM0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18 6h1v1H18zM20 6h1v1H20zM22,6 h7v1H22zM8 7h3v1H8zM13 7h1v1H13zM16 7h4v1H16zM1 8h1v1H1zM3 8h4v1H3zM8 8h1v1H8zM10 8h1v1H10zM15 8h2v1H15zM21 8h2v1H21zM24 8h2v1H24zM27 8h1v1H27zM0 9h3v1H0zM4 9h2v1H4zM9 9h1v1H9zM11 9h1v1H11zM15 9h2v1H15zM18 9h2v1H18zM23 9h3v1H23zM27 9h1v1H27zM1 10h2v1H1zM6 10h1v1H6zM11 10h2v1H11zM14 10h1v1H14zM16 10h2v1H16zM21 10h2v1H21zM25 10h2v1H25zM0 11h1v1H0zM2 11h3v1H2zM7 11h1v1H7zM9 11h3v1H9zM15 11h3v1H15zM24 11h1v1H24zM28,11 h1v1H28zM2 12h1v1H2zM5 12h4v1H5zM10 12h2v1H10zM14 12h1v1H14zM19 12h4v1H19zM25 12h1v1H25zM27 12h1v1H27zM5 13h1v1H5zM9 13h4v1H9zM14 13h1v1H14zM16 13h1v1H16zM18 13h1v1H18zM22 13h1v1H22zM24 13h1v1H24zM26 13h1v1H26zM28,13 h1v1H28zM0 14h1v1H0zM2 14h1v1H2zM5 14h3v1H5zM12 14h3v1H12zM16 14h1v1H16zM18 14h3v1H18zM23 14h1v1H23zM25 14h1v1H25zM28,14 h1v1H28zM0 15h4v1H0zM5 15h1v1H5zM7 15h2v1H7zM10 15h2v1H10zM14 15h3v1H14zM19 15h2v1H19zM24 15h4v1H24zM0 16h1v1H0zM3 16h1v1H3zM6 16h3v1H6zM10 16h2v1H10zM17 16h2v1H17zM20 16h1v1H20zM25 16h1v1H25zM28,16 h1v1H28zM0 17h6v1H0zM8 17h1v1H8zM11 17h2v1H11zM17 17h1v1H17zM19 17h2v1H19zM24 17h3v1H24zM0 18h2v1H0zM4 18h3v1H4zM11 18h4v1H11zM16 18h2v1H16zM19 18h1v1H19zM28,18 h1v1H28zM0 19h6v1H0zM7 19h2v1H7zM10 19h1v1H10zM15 19h2v1H15zM18 19h1v1H18zM21 19h3v1H21zM26,19 h3v1H26zM0 20h2v1H0zM3 20h4v1H3zM8 20h1v1H8zM10 20h1v1H10zM12 20h1v1H12zM16 20h2v1H16zM20 20h8v1H20zM8 21h2v1H8zM11 21h2v1H11zM15 21h1v1H15zM17 21h2v1H17zM20 21h1v1H20zM24 21h3v1H24zM0 22h7v1H0zM12 22h1v1H12zM14 22h2v1H14zM19 22h2v1H19zM22 22h1v1H22zM24 22h1v1H24zM26 22h1v1H26zM0 23h1v1H0zM6 23h1v1H6zM8 23h1v1H8zM10 23h4v1H10zM15 23h1v1H15zM18 23h3v1H18zM24 23h2v1H24zM27 23h1v1H27zM0 24h1v1H0zM2 24h3v1H2zM6 24h1v1H6zM8 24h3v1H8zM12 24h3v1H12zM17 24h1v1H17zM19 24h6v1H19zM27,24 h2v1H27zM0 25h1v1H0zM2 25h3v1H2zM6 25h1v1H6zM8 25h1v1H8zM11 25h2v1H11zM14 25h1v1H14zM18 25h1v1H18zM23 25h1v1H23zM26 25h2v1H26zM0 26h1v1H0zM2 26h3v1H2zM6 26h1v1H6zM9 26h3v1H9zM13 26h3v1H13zM20 26h2v1H20zM23 26h3v1H23zM27,26 h2v1H27zM0 27h1v1H0zM6 27h1v1H6zM8 27h3v1H8zM14 27h1v1H14zM16 27h1v1H16zM21 27h1v1H21zM24 27h3v1H24zM28,27 h1v1H28zM0 28h7v1H0zM11 28h1v1H11zM15 28h1v1H15zM18 28h4v1H18zM23 28h2v1H23z" shape-rendering="crispEdges"></path></svg>
-        <div class="t"><b>โหลดแอป Claude</b><span class="url">claude.com/download</span></div>
-      </div>
-
-      <div class="box">
-        <h2 class="lab">Brain<span class="th">ติดตั้งส่วนจำ ต่อจากขั้น 6</span></h2>
-        <div class="qr">
-          <svg aria-label="QR ไป repo claude-code-for-work-brain" viewBox="0 0 33 33" role="img"><path fill="#FFFFFF" d="M0,0 h33v33H0z" shape-rendering="crispEdges"></path><path fill="#2A2620" d="M0 0h7v1H0zM11 0h1v1H11zM16 0h5v1H16zM23 0h1v1H23zM26,0 h7v1H26zM0 1h1v1H0zM6 1h1v1H6zM10 1h2v1H10zM15 1h4v1H15zM20 1h3v1H20zM26 1h1v1H26zM32,1 h1v1H32zM0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM8 2h2v1H8zM11 2h1v1H11zM14 2h2v1H14zM19 2h4v1H19zM26 2h1v1H26zM28 2h3v1H28zM32,2 h1v1H32zM0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h3v1H8zM12 3h1v1H12zM15 3h1v1H15zM17 3h3v1H17zM22 3h1v1H22zM24 3h1v1H24zM26 3h1v1H26zM28 3h3v1H28zM32,3 h1v1H32zM0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM8 4h3v1H8zM12 4h10v1H12zM23 4h2v1H23zM26 4h1v1H26zM28 4h3v1H28zM32,4 h1v1H32zM0 5h1v1H0zM6 5h1v1H6zM8 5h2v1H8zM12 5h1v1H12zM14 5h1v1H14zM26 5h1v1H26zM32,5 h1v1H32zM0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18 6h1v1H18zM20 6h1v1H20zM22 6h1v1H22zM24 6h1v1H24zM26,6 h7v1H26zM8 7h1v1H8zM10 7h1v1H10zM14 7h1v1H14zM16 7h1v1H16zM19 7h1v1H19zM21 7h1v1H21zM0 8h1v1H0zM2 8h5v1H2zM9 8h1v1H9zM13 8h2v1H13zM17 8h1v1H17zM26 8h5v1H26zM0 9h1v1H0zM2 9h1v1H2zM13 9h1v1H13zM16 9h2v1H16zM19 9h3v1H19zM23 9h1v1H23zM26 9h2v1H26zM29 9h2v1H29zM32,9 h1v1H32zM2 10h5v1H2zM9 10h3v1H9zM13 10h3v1H13zM22 10h1v1H22zM24 10h2v1H24zM28 10h1v1H28zM30 10h2v1H30zM0 11h1v1H0zM3 11h3v1H3zM8 11h2v1H8zM11 11h1v1H11zM13 11h1v1H13zM19 11h3v1H19zM24 11h2v1H24zM28,11 h5v1H28zM2 12h1v1H2zM4 12h4v1H4zM10 12h1v1H10zM14 12h2v1H14zM17 12h1v1H17zM19 12h2v1H19zM22 12h3v1H22zM27 12h3v1H27zM31,12 h2v1H31zM2 13h2v1H2zM5 13h1v1H5zM7 13h1v1H7zM9 13h1v1H9zM11 13h1v1H11zM15 13h1v1H15zM18 13h3v1H18zM23 13h1v1H23zM26 13h1v1H26zM30,13 h3v1H30zM4 14h1v1H4zM6 14h5v1H6zM12 14h1v1H12zM14 14h2v1H14zM17 14h2v1H17zM20 14h1v1H20zM22 14h1v1H22zM24 14h4v1H24zM29 14h1v1H29zM31 14h1v1H31zM2 15h1v1H2zM5 15h1v1H5zM8 15h1v1H8zM10 15h1v1H10zM12 15h3v1H12zM16 15h1v1H16zM19 15h3v1H19zM25 15h2v1H25zM29 15h2v1H29zM0 16h3v1H0zM4 16h3v1H4zM8 16h2v1H8zM11 16h2v1H11zM14 16h1v1H14zM16 16h2v1H16zM19 16h1v1H19zM22 16h1v1H22zM24 16h2v1H24zM27 16h2v1H27zM32,16 h1v1H32zM1 17h1v1H1zM4 17h2v1H4zM7 17h2v1H7zM10 17h1v1H10zM16 17h1v1H16zM18 17h3v1H18zM23 17h1v1H23zM26 17h2v1H26zM29 17h2v1H29zM32,17 h1v1H32zM0 18h2v1H0zM4 18h1v1H4zM6 18h1v1H6zM8 18h1v1H8zM10 18h2v1H10zM13 18h1v1H13zM15 18h4v1H15zM20 18h1v1H20zM22 18h1v1H22zM24 18h5v1H24zM30 18h1v1H30zM0 19h5v1H0zM7 19h1v1H7zM10 19h1v1H10zM12 19h1v1H12zM14 19h2v1H14zM18 19h5v1H18zM25 19h1v1H25zM27 19h4v1H27zM6 20h3v1H6zM11 20h3v1H11zM15 20h1v1H15zM17 20h1v1H17zM19 20h1v1H19zM22 20h1v1H22zM24 20h2v1H24zM27 20h3v1H27zM31,20 h2v1H31zM0 21h1v1H0zM3 21h2v1H3zM12 21h1v1H12zM14 21h1v1H14zM16 21h2v1H16zM19 21h5v1H19zM26 21h1v1H26zM29 21h1v1H29zM32,21 h1v1H32zM0 22h1v1H0zM4 22h1v1H4zM6 22h2v1H6zM9 22h1v1H9zM13 22h1v1H13zM15 22h3v1H15zM20 22h1v1H20zM25 22h1v1H25zM30 22h2v1H30zM0 23h1v1H0zM8 23h2v1H8zM14 23h2v1H14zM19 23h5v1H19zM25 23h2v1H25zM29,23 h4v1H29zM0 24h1v1H0zM2 24h1v1H2zM5 24h2v1H5zM9 24h1v1H9zM11 24h2v1H11zM14 24h1v1H14zM17 24h1v1H17zM22 24h7v1H22zM32,24 h1v1H32zM8 25h1v1H8zM10 25h2v1H10zM16 25h1v1H16zM18 25h2v1H18zM21 25h1v1H21zM23 25h2v1H23zM28 25h1v1H28zM30 25h1v1H30zM32,25 h1v1H32zM0 26h7v1H0zM12 26h1v1H12zM15 26h4v1H15zM20 26h1v1H20zM23 26h2v1H23zM26 26h1v1H26zM28 26h1v1H28zM30 26h2v1H30zM0 27h1v1H0zM6 27h1v1H6zM8 27h1v1H8zM10 27h3v1H10zM18 27h1v1H18zM20 27h2v1H20zM23 27h2v1H23zM28 27h4v1H28zM0 28h1v1H0zM2 28h3v1H2zM6 28h1v1H6zM8 28h2v1H8zM12 28h1v1H12zM15 28h1v1H15zM17 28h1v1H17zM19 28h2v1H19zM24 28h6v1H24zM31 28h1v1H31zM0 29h1v1H0zM2 29h3v1H2zM6 29h1v1H6zM8 29h1v1H8zM11 29h1v1H11zM14 29h1v1H14zM16 29h1v1H16zM18 29h3v1H18zM23 29h3v1H23zM28 29h1v1H28zM30,29 h3v1H30zM0 30h1v1H0zM2 30h3v1H2zM6 30h1v1H6zM8 30h3v1H8zM15 30h2v1H15zM20 30h1v1H20zM22 30h1v1H22zM26 30h2v1H26zM29 30h2v1H29zM0 31h1v1H0zM6 31h1v1H6zM12 31h4v1H12zM18 31h1v1H18zM20 31h3v1H20zM28 31h3v1H28zM0 32h7v1H0zM8 32h1v1H8zM11 32h2v1H11zM15 32h1v1H15zM17 32h1v1H17zM19 32h1v1H19zM22 32h6v1H22zM29 32h1v1H29zM31 32h1v1H31z" shape-rendering="crispEdges"></path></svg>
-          <div class="t">ส่วนจำตัวตั้งต้นของคลาส<span class="url wrap" style="font-size:10px">github.com/nomsodcaramel/<wbr>claude-code-for-work-brain</span></div>
-        </div>
-        <ol>
-          <li>วางลิงก์นี้ในช่องพิมพ์ แล้วพิมพ์ <span class="say">ช่วยติดตั้งสมองนี้ให้หน่อย</span></li>
-          <li>เสร็จแล้วเปิด session ใหม่ในโฟลเดอร์เดิม</li>
-          <li>ลองถาม <span class="say">งานนี้มีใครบ้าง ตัดสินใจอะไรไปแล้ว</span></li>
-          <li>ลองพิมพ์ <code>/meeting-slide</code></li>
-        </ol>
-      </div>
-
-      <div class="box opt">
-        <h2 class="lab">Connectors<span class="th">ไม่บังคับ</span></h2>
-        <p>ให้ Claude ใช้ปฏิทิน Notion Slack ฯลฯ ของเราได้</p>
-        <ol>
-          <li>กด <span class="ui">+</span> ข้างช่องพิมพ์ แล้วเลือก <span class="ui">Connectors</span></li>
-          <li>เลือกบริการ เช่น Google Calendar แล้ว Sign in และอนุญาต</li>
-          <li>จัดการหรือเลิกเชื่อม: <span class="ui">Settings</span> → <span class="ui">Connectors</span></li>
-        </ol>
-        <p class="warn">เชื่อมแล้ว Claude อ่านข้อมูลจริงในบัญชีนั้นได้ บัญชีบริษัท ถามฝ่าย IT ก่อน</p>
-      </div>
-    </aside>
   </div>
 
   <section class="stuck">
@@ -196,8 +168,4 @@ ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:v
     </div>
   </section>
 
-  <footer class="foot">
-    <span class="pv"><b>ลิงก์ Artifact บน Pro เป็นลิงก์สาธารณะ</b> ก่อนส่งต่อ ตัดชื่อจริงและข้อมูลลูกค้าออก</span>
-    <span>คู่มือเต็มอยู่ในโฟลเดอร์ docs ของ repo ด้านบน · ข้อมูลจาก code.claude.com/docs ณ 23 ก.ย. 69</span>
-  </footer>
 </main>

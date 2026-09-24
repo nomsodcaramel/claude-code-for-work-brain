@@ -31,7 +31,7 @@ Claude อ่านไฟล์นี้ก่อนทุกครั้งท�
 | `decision-log.md` | สิ่งที่ตัดสินใจไปแล้ว และเพราะอะไร (ใหม่สุดอยู่บน) |
 | `meetings/` | สรุปประชุม skill `/meeting-slide` เขียนไว้ที่นี่ |
 | `slides/` | สไลด์ที่ skill `/meeting-slide` ทำ (มีหลังใช้ครั้งแรก) |
-| `templates/slides.html` | แม่แบบสไลด์ |
+| `templates/slides.html` | Template สไลด์ |
 | `sample/meeting-transcript.md` | transcript ประชุม 35 นาที ตัวอย่างสมมติ ไว้ฝึก |
 | `.claude/skills/` | วิธีทำงานที่เก็บไว้ใช้ซ้ำ: `/meeting-slide` transcript ประชุม เป็นสไลด์สรุปพร้อมลิงก์ |
 | `docs/` | คู่มือติดตั้ง Claude Code · ส่วนจำ · Connectors สำหรับคน ไม่ต้องแก้ |

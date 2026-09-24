@@ -36,7 +36,7 @@ users/                    คนที่เราทำงานให้
 decision-log.md           ตัดสินอะไรไปแล้ว เพราะอะไร
 meetings/                 สรุปประชุมที่ /meeting-slide เขียนไว้
 slides/                   สไลด์ที่ /meeting-slide ทำ (มีหลังใช้ครั้งแรก)
-templates/slides.html     แม่แบบสไลด์
+templates/slides.html     Template สไลด์
 sample/                   transcript ประชุม 35 นาที ตัวอย่างสมมติ
 .claude/skills/           /meeting-slide
 docs/                     คู่มือติดตั้ง Claude Code · ส่วนจำ · Connectors
