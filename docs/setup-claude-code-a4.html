@@ -86,7 +86,21 @@ ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:v
 @page{size:A4 portrait;margin:0}
 @media print{
   body{padding:0;background:var(--paper)}
-  .sheet{width:210mm;height:297mm;max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:hidden}
+  .sheet{width:210mm;height:297mm;max-width:none;margin:0;border-radius:0;box-shadow:none;overflow:hidden;gap:6.5mm}
+  /* four steps leave a quarter of the page empty at screen sizes, so paper gets larger type and pictures (First, 24 Sep) */
+  h1{font-size:34px}
+  .hero p{font-size:15.5px}
+  .need{font-size:13.5px}
+  ol.steps{gap:7mm}
+  ol.steps li{font-size:14.5px;grid-template-columns:1fr 56mm}
+  ol.steps li .scr{width:56mm}
+  ol.steps li h3{font-size:17px}
+  ol.steps li .n{width:8mm;height:8mm;font-size:13px}
+  ol.steps::before{left:3.9mm}
+  ol.steps li{padding-left:12mm}
+  .stuck{margin-top:auto}
+  .stuck .row{font-size:12.5px}
+  .stuck .row b{font-size:13px}
 }
 </style>
 
@@ -137,7 +151,7 @@ ol.steps li .os b{font-family:var(--fe);font-weight:700;font-size:10.5px;color:v
         </li>
         <li class="done"><span class="n">4</span><div>
           <h3>เลือก <span class="ui">Local</span> แล้วกด <span class="ui">Select folder</span></h3>
-          <p>สร้างโฟลเดอร์ว่างไว้หนึ่งอันก่อน เช่น <code>claude-brain</code> แล้วเลือกโฟลเดอร์นั้น</p>
+          <p>สร้างโฟลเดอร์ว่างไว้หนึ่งอันก่อน เช่น <code>claude-brain</code> แล้ว<span style="white-space:nowrap">เลือกโฟลเดอร์นั้น</span></p>
           <p>ในคลาสเราจะ copy ลิงก์นี้ ไปบอก Claude ให้ติดตั้งลงโฟลเดอร์นี้ <a class="url wrap" href="https://github.com/nomsodcaramel/claude-code-for-work-brain">github.com/nomsodcaramel/claude-code-for-work-brain</a></p>
         </div>
           <svg class="scr" viewBox="0 0 180 96" role="img" aria-label="เลือก Local แล้วกด Select folder เลือกโฟลเดอร์ claude-brain"><rect x="1" y="1" width="178" height="94" rx="7" fill="#fff" stroke="rgba(42,38,32,.28)"/><path d="M1 18.5H179" stroke="rgba(42,38,32,.14)"/><circle cx="10" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="18" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><circle cx="26" cy="9.5" r="2.5" fill="rgba(42,38,32,.28)"/><rect x="14" y="30" width="44" height="20" rx="10" fill="#EFF9F8" stroke="#00C4BA"/><text x="36" y="44" font-size="10.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#2A2620" text-anchor="middle">Local</text><rect x="66" y="30" width="100" height="20" rx="10" fill="#2A2620"/><text x="116" y="44" font-size="10.5" font-weight="700" font-family="Inter,Kanit,system-ui,sans-serif" fill="#fff" text-anchor="middle">Select folder</text><path d="M34 62h10l3 3h17v16H34z" fill="#EFF9F8" stroke="#00C4BA" stroke-linejoin="round"/><text x="72" y="76" font-size="10.5" font-family="IBM Plex Mono,monospace" fill="#2A2620">claude-brain</text></svg>
