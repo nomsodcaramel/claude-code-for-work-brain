@@ -38,14 +38,11 @@ Mac เปิดจาก Applications · Windows เปิดจาก Start me
 
 **Local** = ทำงานบนคอมเรา ด้วยไฟล์ของเรา แล้วเลือกโฟลเดอร์ที่จะทำงาน
 
-โฟลเดอร์ที่เลือกคือโฟลเดอร์ของคลาส อยู่ที่ [github.com/nomsodcaramel/claude-code-for-work-brain](https://github.com/nomsodcaramel/claude-code-for-work-brain)
-โหลดมาไว้ในคอมก่อน กด [โหลดไฟล์ ZIP](https://github.com/nomsodcaramel/claude-code-for-work-brain/archive/refs/heads/main.zip) แล้วแตกไฟล์
-
-- **Mac** ดับเบิลคลิกไฟล์ ZIP
-- **Windows** คลิกขวาที่ไฟล์ ZIP แล้วกด **Extract All**
-
-จะได้โฟลเดอร์ `claude-code-for-work-brain-main` เลือกโฟลเดอร์นี้ แค่นี้ก็พร้อมเข้าคลาสแล้ว
+ครั้งแรก สร้างโฟลเดอร์ว่างไว้หนึ่งอัน เช่น `claude-brain` (ใน Documents ก็ได้) แล้วเลือกโฟลเดอร์นั้น
 Claude จะเห็นและแก้ไฟล์ได้เฉพาะในโฟลเดอร์ที่เราเลือก
+
+ในคลาสเราจะ copy ลิงก์นี้ ไปบอก Claude ให้ติดตั้งลงโฟลเดอร์นี้
+[github.com/nomsodcaramel/claude-code-for-work-brain](https://github.com/nomsodcaramel/claude-code-for-work-brain)
 
 ## ในคลาส (ไว้ดูทีหลัง)
 
@@ -67,7 +64,7 @@ Claude จะเห็นและแก้ไฟล์ได้เฉพาะ�
 
 > ในโฟลเดอร์นี้มีไฟล์อะไรบ้าง
 
-Claude ตอบกลับมา = ใช้งานได้แล้ว ส่วนจำ (Brain) อยู่ในโฟลเดอร์นี้แล้ว วิธีใช้เราทำด้วยกันในคลาส ([คู่มือข้อ 2](02-brain-setup.md) ไว้ดูทีหลัง)
+Claude ตอบกลับมา = ใช้งานได้แล้ว ส่วนจำ (Brain) เราติดตั้งด้วยกันในคลาส ([คู่มือข้อ 2](02-brain-setup.md) ไว้ดูทีหลัง)
 
 ## ใช้งานคล่องขึ้น
 
@@ -81,7 +78,6 @@ Claude ตอบกลับมา = ใช้งานได้แล้ว ส
 |---|---|
 | กด Code แล้วขึ้นให้อัปเกรด | บัญชียังไม่ใช่ Pro ต้องสมัครแพ็กเกจ Pro ขึ้นไปก่อน |
 | กด Code แล้วขึ้นให้ Sign in ออนไลน์ | ทำให้เสร็จในเบราว์เซอร์ แล้วปิดแอปแล้วเปิดใหม่ |
-| Windows กด Select folder แล้วเลือกไม่ได้ | ยังไม่ได้แตกไฟล์ คลิกขวาที่ไฟล์ ZIP แล้วกด Extract All ก่อน |
 | Windows สั่งแล้วคำสั่งไม่ทำงาน | ลง Git for Windows แล้วเปิดแอปใหม่ |
 
 ## ข้อมูลของเรา
