@@ -3,10 +3,18 @@
   สำหรับ Claude (skill /meeting-slide):
   1. คัดลอกไฟล์นี้เป็น slides/<วันที่>-<หัวข้อ>.html แล้วแก้ในไฟล์ใหม่ ห้ามแก้ Template
   2. เขียนเกณฑ์จาก "เอ๊ะ ก่อน" ไว้ในคอมเมนต์ข้างล่าง (บรรทัดของผู้ใช้ · ให้ใครดู · ต้องตอบอะไรบ้าง)
-  3. หนึ่งหน้า = หนึ่งเรื่อง หัวข้อเป็นประโยคที่ตอบคำถามของผู้ใช้ ไม่เกิน 8 หน้ารวมปก
-  4. ใช้ได้ 4 แบบ: s-cover (ปก) · s-point (หนึ่งประเด็น) · s-table (ตาราง ใครทำอะไร) · s-next (ปิด ขั้นต่อไป)
-  5. ลบหน้าตัวอย่างที่ไม่ใช้ออก เปลี่ยนสีหลักได้ที่ --accent
-  6. ก่อนเผยแพร่ ตัดชื่อจริง เบอร์โทร ข้อมูลลูกค้าจริงออก (ลิงก์บน Pro เป็นลิงก์สาธารณะ)
+  3. หนึ่งหน้า = หนึ่งเรื่อง ไม่เกิน 8 หน้ารวมปก ใช้ได้ 4 แบบ: s-cover (ปก) · s-point (หนึ่งประเด็น) · s-table (ตาราง) · s-next (ปิด ขั้นต่อไป)
+  4. <main> ใส่ data-len = ความยาวประชุม mm:ss (เวลาสุดท้ายใน transcript) ไม่รู้ ลบทิ้งได้
+  5. แถวบน .hd: ชื่อทีม · "สรุปประชุม <วันที่>" · เลขหน้า <span class="pgn"></span> ไว้เฉย ๆ หน้าเว็บนับให้เอง
+  6. ปก: ซ้ายคือให้ใครดู + หัวเรื่อง ขวาคือ .qa หนึ่งแถวต่อหนึ่งข้อที่ผู้ใช้เลือกว่า "ต้องตอบ" (ไม่เกิน 4) · .q = คำถาม · <b> = คำตอบสั้น · ข้อที่ยังไม่ตัดสินใส่ class="wait"
+  7. หน้าอื่น: .ask บอกคำถามที่หน้านี้ตอบ + สถานะ <span class="st">ตัดสินแล้ว</span> หรือ <span class="st wait">รอประกาศ</span>
+  8. หัวข้อเป็นประโยคพูด มีกริยา ไม่เกิน 10 คำ ใส่ <em> ได้ 1 วลีต่อหน้า ที่วลีที่เป็นคำตอบ
+  9. .facts ไม่เกิน 3 ช่อง ช่องละ <b>คำหลัก</b> + 1 บรรทัด · เรื่องที่ยังไม่ตัดสินใส่ class="wait"
+  10. ทุกหน้าที่มีข้อมูล ใส่ <p class="src">ที่มา: บันทึกประชุม <วันที่> นาที mm:ss · mm:ss</p> จากสรุปในส่วนจำ ไม่ใส่ชื่อคน หน้าเว็บวาดเส้นเวลาให้เอง
+  11. คำที่ห้ามตัดขึ้นบรรทัดใหม่กลางคำ ครอบด้วย <span class="nb">คำนั้น</span>
+  12. ลบหน้าตัวอย่างที่ไม่ใช้ออก เปลี่ยนสีทีมได้ที่ --accent บรรทัดเดียว
+  13. ก่อนเผยแพร่ ตัดชื่อจริง เบอร์โทร ข้อมูลลูกค้าจริงออก (ลิงก์บน Pro เป็นลิงก์สาธารณะ)
+  14. อยากได้ PDF: เปิดลิงก์ กด Ctrl+P (Mac: Cmd+P) เลือก บันทึกเป็น PDF ได้หน้าละสไลด์
 
   เกณฑ์ (จากเอ๊ะ ก่อน):
   บรรทัดของผู้ใช้: <ที่ผู้ใช้พิมพ์เอง>
@@ -14,80 +22,176 @@
   ต้องตอบ: <คำตอบข้อ 2 ข้อละบรรทัด>
 -->
 <title>ชื่อเรื่องของสไลด์</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600;700&display=swap">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
 :root{
-  --bg:#F4F4F2;--card:#FFFFFF;--ink:#1D1F24;--text:#3D4049;--mut:#6B6F78;--line:#DCDDE0;
-  --accent:#2F6FEB;--accent-soft:#E6EEFD;
-  --font:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --accent:#C4351A;
+  --page:#E6E7EA;--paper:#FFFFFF;--ink:#15171C;--text:#383B43;--mut:#62666F;
+  --rule:#15171C;--hair:#D5D7DC;--hatch:#CDD0D6;
+  --f:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#15171B;--card:#1F2227;--ink:#F2F3F5;--text:#CDD0D6;--mut:#9A9FA8;--line:#353940;--accent:#7EA6F7;--accent-soft:#223252}
+  :root:not([data-theme="light"]){--accent:#FF7B5C;--page:#0C0D10;--paper:#17191E;--ink:#F2F3F5;--text:#C9CCD3;--mut:#979CA6;--rule:#F2F3F5;--hair:#30343B;--hatch:#3A3E46}
 }
-:root[data-theme="dark"]{--bg:#15171B;--card:#1F2227;--ink:#F2F3F5;--text:#CDD0D6;--mut:#9A9FA8;--line:#353940;--accent:#7EA6F7;--accent-soft:#223252}
+:root[data-theme="dark"]{--accent:#FF7B5C;--page:#0C0D10;--paper:#17191E;--ink:#F2F3F5;--text:#C9CCD3;--mut:#979CA6;--rule:#F2F3F5;--hair:#30343B;--hatch:#3A3E46}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;padding-block:24px;padding-inline:16px}
-.deck{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
-.s{background:var(--card);border:1px solid var(--line);border-radius:16px;aspect-ratio:16/9;padding:6% 7%;
-   display:flex;flex-direction:column;justify-content:center;gap:1.2em;position:relative;overflow:hidden;scroll-margin-top:16px}
-.s .no{position:absolute;right:4%;bottom:5%;font-size:14px;color:var(--mut);font-variant-numeric:tabular-nums}
-.tag{align-self:flex-start;font-size:15px;font-weight:600;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:.2em .9em}
-h1,h2{margin:0;color:var(--ink);font-weight:700;text-wrap:balance;line-height:1.3}
-h1{font-size:clamp(28px,5.2vw,54px)}
-h2{font-size:clamp(22px,3.6vw,38px)}
-p{margin:0;font-size:clamp(16px,2.1vw,22px);max-width:40em}
-.lines{display:flex;flex-direction:column;gap:.6em;font-size:clamp(16px,2.1vw,22px)}
-.lines div{padding-left:.9em;border-left:4px solid var(--accent)}
-.wait{color:var(--mut)}
-table{border-collapse:collapse;width:100%;font-size:clamp(14px,1.9vw,20px)}
-th,td{text-align:left;padding:.5em .6em;border-bottom:1px solid var(--line);vertical-align:top}
-th{color:var(--mut);font-weight:600}
-.tw{overflow-x:auto}
-.s-cover{background:var(--accent-soft)}
-.s-cover .tag{background:var(--card)}
-.s-next h2{color:var(--accent)}
-@media (max-width:640px){.s{aspect-ratio:auto;min-height:56vw;padding:28px 22px}}
+body{margin:0;background:var(--page);color:var(--text);font-family:var(--f);line-height:1.55;padding:24px 16px;-webkit-font-smoothing:antialiased}
+.deck{max-width:1040px;margin:0 auto;display:flex;flex-direction:column;gap:24px;container-type:inline-size}
+.s{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--paper);border-radius:4px;
+   border-top:.55cqw solid var(--rule);padding:2.4cqw 5cqw 3cqw;display:flex;flex-direction:column}
+h1,h2{margin:0;font-weight:700;color:var(--ink);letter-spacing:-.005em;text-wrap:balance}
+/* the one emphasis per page: the answer phrase in the team colour */
+em{font-style:normal;color:var(--accent);white-space:nowrap}
+.nb{white-space:nowrap}
+.hd{display:flex;align-items:baseline;gap:1.4cqw;font-size:1.4cqw;color:var(--mut);padding-bottom:1.1cqw;border-bottom:1px solid var(--hair)}
+.hd .team{font-weight:700;color:var(--ink)}
+.hd .pgn{margin-left:auto}
+.pgn,.tl-end{font-family:var(--m);font-variant-numeric:tabular-nums}
+td.n{font-variant-numeric:tabular-nums}
+/* what this page answers, and whether it is settled */
+.ask{display:flex;align-items:center;gap:1.4cqw;margin-top:3.2cqw;font-size:1.8cqw;color:var(--mut)}
+.st{font-size:1.35cqw;font-weight:700;letter-spacing:.02em;color:var(--paper);background:var(--ink);border-radius:2px;padding:.2cqw .9cqw}
+/* waiting: the solid bar becomes a hatched bar; words never sit on the hatch */
+.st.wait{color:var(--ink);background:none;box-shadow:inset 0 0 0 .12cqw var(--mut);display:inline-flex;align-items:center;gap:.5em}
+.st.wait::before{content:"";width:.9em;height:.9em;background:var(--hz)}
+:root{--hz:repeating-linear-gradient(135deg,var(--mut) 0 .12cqw,transparent .12cqw .55cqw)}
+h2{margin-top:1.2cqw;font-size:4.3cqw;line-height:1.28;max-width:20em}
+.facts{margin-top:auto;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:2.6cqw;font-size:1.85cqw;line-height:1.5}
+.facts>div{position:relative;border-top:.35cqw solid var(--rule);padding-top:1.2cqw}
+.facts b{display:block;margin-bottom:.4cqw;font-size:2.5cqw;line-height:1.3;color:var(--ink)}
+.facts .wait,.qa .wait{color:var(--mut)}
+.facts .wait{border-top-color:transparent}
+.facts .wait::before,.qa .wait::before{content:"";position:absolute;left:0;right:0;top:-.35cqw;height:.9cqw;background:var(--hz)}
+.facts .wait b,.qa .wait b{color:var(--mut)}
+/* the source line + the meeting's time track, drawn by the script from the minutes in the text */
+.src{margin:2.4cqw 0 0;font-size:1.3cqw;color:var(--mut)}
+.tl{position:relative;height:1.4cqw;margin-top:.7cqw}
+.tl::before{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid var(--hair)}
+.tl i{position:absolute;top:50%;width:.9cqw;height:.9cqw;margin:-.45cqw 0 0 -.45cqw;border-radius:50%;background:var(--accent)}
+.tl-end{display:flex;justify-content:space-between;font-size:1.1cqw;color:var(--mut)}
+/* cover: who it is for and one sentence on the left; every question the reader needed answered, as a ledger on the right */
+.cv{flex:1;display:grid;grid-template-columns:1.35fr 1fr;gap:4.6cqw;margin-top:4cqw}
+.s-cover .for{margin:0;font-size:1.9cqw;color:var(--mut)}
+.s-cover h1{margin-top:1cqw;font-size:4.9cqw;line-height:1.2}
+.qa{list-style:none;margin:0;padding:0;align-self:start;border-top:.35cqw solid var(--rule)}
+.qa li{position:relative;padding:1.05cqw 0 1.15cqw;font-size:1.45cqw;line-height:1.4;border-bottom:1px solid var(--hair)}
+.qa li:last-child{border-bottom:0}
+.qa .q{display:block;color:var(--mut)}
+.qa b{display:block;font-size:2.05cqw;line-height:1.3;color:var(--ink)}
+.qa .more{display:block;color:var(--text)}
+.qa .wait::before{top:-.35cqw}
+.qa li.wait:not(:first-child)::before{top:-1px;height:.7cqw}
+/* table */
+.tw{margin-top:auto;border-top:.3cqw solid var(--rule)}
+table{width:100%;border-collapse:collapse;font-size:1.85cqw;line-height:1.45}
+th{padding:.9cqw 2cqw .8cqw 0;border-bottom:1px solid var(--hair);text-align:left;font-weight:500;font-size:1.35cqw;color:var(--mut)}
+td{padding:1cqw 2cqw 1cqw 0;border-bottom:1px solid var(--hair);vertical-align:top}
+td:first-child{font-weight:700;color:var(--ink);white-space:nowrap}
+td.n{white-space:nowrap}
+/* close: the one thing to do next, set large */
+.s-next h2{margin-top:1.4cqw;font-size:5.6cqw;line-height:1.22;max-width:14em}
+.s-next .sub{margin:1.8cqw 0 0;font-size:2cqw}
+.s-next .src{margin-top:auto}
+@media (max-width:640px){
+  .s{aspect-ratio:auto;border-top-width:5px;padding:14px 18px 18px}
+  .hd{font-size:12px;gap:10px;padding-bottom:10px}
+  .ask{font-size:14px;gap:10px;margin-top:22px} .st{font-size:12px;padding:1px 8px}
+  :root{--hz:repeating-linear-gradient(135deg,var(--mut) 0 1.5px,transparent 1.5px 6px)}
+  .st.wait{box-shadow:inset 0 0 0 1.5px var(--mut)}
+  .facts .wait::before{top:-2px;height:7px}
+  h2{font-size:22px;margin-top:8px;max-width:none} .s-cover h1{font-size:27px;max-width:none} .s-next h2{font-size:26px;max-width:none}
+  .s-cover .for{font-size:14px;margin-top:22px} .s-next .sub{font-size:15px;margin-top:10px}
+  .cv{display:block;margin-top:22px} .qa{margin-top:24px}
+  .facts{grid-auto-flow:row;grid-auto-columns:auto;margin-top:24px;gap:14px;font-size:14px}
+  .facts>div{border-top-width:2px;padding-top:8px} .facts b{font-size:17px;margin-bottom:2px}
+  .qa{border-top-width:2px} .qa li{padding:10px 0;font-size:13px} .qa b{font-size:16px}
+  .qa .wait::before{top:-2px;height:6px} .qa li.wait:not(:first-child)::before{top:-1px;height:5px}
+  .tw{margin-top:22px;border-top-width:2px;overflow-x:auto} table{font-size:13px} th{font-size:11px} td,th{padding-right:12px}
+  .src{font-size:11px;margin-top:22px} .tl{height:12px;margin-top:6px} .tl i{width:8px;height:8px;margin:-4px 0 0 -4px} .tl-end{font-size:10px}
+  em{white-space:normal}
+  .s-next .src{margin-top:22px}
+}
+@page{size:1280px 720px;margin:0}
+@media print{
+  :root{--accent:#C4351A;--page:#FFFFFF;--paper:#FFFFFF;--ink:#15171C;--text:#383B43;--mut:#62666F;--rule:#15171C;--hair:#D5D7DC;--hatch:#CDD0D6}
+  body{background:#fff;padding:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .deck{max-width:none;width:1280px;gap:0;display:block}
+  .s{border-radius:0;break-after:page}
+  .s:last-child{break-after:auto}
+}
 </style>
 
 <main class="deck">
-
-  <!-- ปก: หัวเรื่อง + ให้ใคร + วันที่ -->
+  <!-- ปก: ซ้าย ให้ใครดู + หัวเรื่องประโยคเดียว · ขวา ทุกข้อที่ต้องตอบ พร้อมคำตอบสั้น -->
   <section class="s s-cover" id="s1">
-    <span class="tag">ให้ใครดู</span>
-    <h1>หัวเรื่องเป็นประโยคเดียว ที่คนดูอยากรู้</h1>
-    <p>วันที่ · ทีมของเรา</p>
-    <span class="no">1</span>
-  </section>
-
-  <!-- หนึ่งประเด็น: หัวข้อตอบคำถามหนึ่งข้อ ใต้หัวข้อไม่เกิน 3 บรรทัดสั้น -->
-  <section class="s s-point" id="s2">
-    <span class="tag">คำถามที่หน้านี้ตอบ</span>
-    <h2>หัวข้อเป็นประโยคที่ตอบคำถามนั้น</h2>
-    <div class="lines">
-      <div>บรรทัดสั้นที่ 1</div>
-      <div>บรรทัดสั้นที่ 2</div>
-      <div class="wait">เรื่องที่ยังไม่ตัดสิน เขียนว่า รอประกาศ</div>
+    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="cv"><div>
+    <p class="for">ให้ใครดู</p>
+    <h1>หัวเรื่องเป็นประโยคเดียว <em>ที่คนดูอยากรู้</em></h1>
     </div>
-    <span class="no">2</span>
+    <ol class="qa">
+      <li><span class="q">คำถามข้อ 1</span><b>คำตอบสั้น ๆ</b></li>
+      <li><span class="q">คำถามข้อ 2</span><b>คำตอบสั้น ๆ</b><span class="more">บรรทัดเสริม ถ้ามี</span></li>
+      <li class="wait"><span class="q">คำถามข้อ 3</span><b>รอประกาศ</b><span class="more">รออะไร หรือรอใคร</span></li>
+    </ol></div>
   </section>
 
-  <!-- ตาราง: ใครทำอะไร เมื่อไร -->
+  <!-- หนึ่งประเด็น: คำถาม + สถานะ · ประโยคที่ตอบ · ไม่เกิน 3 ช่อง · ที่มา -->
+  <section class="s s-point" id="s2">
+    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="ask"><span>คำถามข้อ 1</span><span class="st">ตัดสินแล้ว</span></div>
+    <h2>หัวข้อเป็นประโยคที่ตอบคำถามนั้น <em>วลีที่เป็นคำตอบ</em></h2>
+    <div class="facts">
+      <div><b>คำหลัก</b>หนึ่งบรรทัดอธิบาย</div>
+      <div><b>คำหลัก</b>หนึ่งบรรทัดอธิบาย</div>
+      <div class="wait"><b>เรื่องที่ยังไม่ตัดสิน</b>รอประกาศ</div>
+    </div>
+    <p class="src">ที่มา: บันทึกประชุม วันที่ นาที mm:ss · mm:ss</p>
+  </section>
+
+  <!-- ตาราง: ใครทำอะไร เมื่อไร · td class="n" สำหรับวันหรือตัวเลข -->
   <section class="s s-table" id="s3">
-    <span class="tag">ใครทำอะไร</span>
+    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="ask"><span>ใครทำอะไร</span><span class="st">ตัดสินแล้ว</span></div>
     <h2>หัวข้อของตาราง</h2>
     <div class="tw"><table>
       <tr><th>ใคร</th><th>ทำอะไร</th><th>เมื่อไร</th></tr>
-      <tr><td>บทบาท</td><td>งาน</td><td>วัน</td></tr>
+      <tr><td>บทบาท</td><td>งาน</td><td class="n">วัน</td></tr>
     </table></div>
-    <span class="no">3</span>
+    <p class="src">ที่มา: บันทึกประชุม วันที่ นาที mm:ss</p>
   </section>
 
-  <!-- ปิด: ขั้นต่อไปหนึ่งอย่าง -->
+  <!-- ปิด: สิ่งเดียวที่อยากให้คนดูทำต่อ -->
   <section class="s s-next" id="s4">
-    <span class="tag">ขั้นต่อไป</span>
-    <h2>สิ่งเดียวที่อยากให้คนดูทำต่อ</h2>
-    <p>วัน เวลา หรือช่องทาง</p>
-    <span class="no">4</span>
+    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="ask"><span>ขั้นต่อไป</span></div>
+    <h2>สิ่งเดียวที่อยากให้คนดูทำต่อ <em>วัน เวลา</em></h2>
+    <p class="sub">ช่องทาง หรือคนที่ติดต่อได้</p>
+    <p class="src">ที่มา: บันทึกประชุม วันที่ นาที mm:ss</p>
   </section>
 
 </main>
+<script>
+(function(){
+  var deck=document.querySelector('.deck'),S=deck.querySelectorAll('.s');
+  function sec(t){var p=t.split(':');return (+p[0])*60+(+p[1])}
+  function mm(x){x=Math.round(x);var m=Math.floor(x/60),s=x%60;return (m<10?'0':'')+m+':'+(s<10?'0':'')+s}
+  var all=[];S.forEach(function(s){var p=s.querySelector('.src');if(p)(p.textContent.match(/\d{1,2}:\d{2}/g)||[]).forEach(function(t){all.push(sec(t))})});
+  var len=deck.dataset.len?sec(deck.dataset.len):Math.max.apply(null,all.concat([60]));
+  S.forEach(function(s,i){
+    var n=s.querySelector('.pgn');if(n)n.textContent=(i+1)+' / '+S.length;
+    var p=s.querySelector('.src');if(!p)return;
+    var ts=(p.textContent.match(/\d{1,2}:\d{2}/g)||[]).map(sec);if(!ts.length)return;
+    var tl=document.createElement('div');tl.className='tl';tl.setAttribute('aria-hidden','true');
+    ts.forEach(function(t){var d=document.createElement('i');d.style.left=Math.min(100,t/len*100)+'%';tl.appendChild(d)});
+    var e=document.createElement('div');e.className='tl-end';e.setAttribute('aria-hidden','true');
+    e.innerHTML='<span>00:00</span><span>'+mm(len)+'</span>';
+    p.after(tl);tl.after(e);
+  });
+})();
+</script>
