@@ -11,7 +11,7 @@
   8. หัวข้อเป็นประโยคพูด มีกริยา ไม่เกิน 10 คำ ใส่ <em> ได้ 1 วลีต่อหน้า ที่วลีที่เป็นคำตอบ
   9. .facts ไม่เกิน 3 ช่อง ช่องละ <b>คำหลัก</b> + 1 บรรทัด · เรื่องที่ยังไม่ตัดสินใส่ class="wait"
   10. ทุกหน้าที่มีข้อมูล ใส่ <p class="src">ที่มา: บันทึกประชุม <วันที่> นาที mm:ss · mm:ss</p> จากสรุปในส่วนจำ ไม่ใส่ชื่อคน หน้าเว็บวาดเส้นเวลาให้เอง
-  11. คำที่ห้ามตัดขึ้นบรรทัดใหม่กลางคำ ครอบด้วย <span class="nb">คำนั้น</span>
+  11. หัวข้อและคำตอบตัวหนา หน้าเว็บตัดบรรทัดตรงเว้นวรรคเท่านั้น: เว้นวรรคระหว่างวลี ห้ามเว้นวรรคกลางคำ (เช่น "พาลูกมา ตลาดนัดเงินออม ได้ไหม") · ข้อความอื่นที่ห้ามตัดกลางคำ ครอบด้วย <span class="nb">คำนั้น</span>
   12. ลบหน้าตัวอย่างที่ไม่ใช้ออก เปลี่ยนสีทีมได้ที่ --accent บรรทัดเดียว
   13. ก่อนเผยแพร่ ตัดชื่อจริง เบอร์โทร ข้อมูลลูกค้าจริงออก (ลิงก์บน Pro เป็นลิงก์สาธารณะ)
   14. อยากได้ PDF: เปิดลิงก์ กด Ctrl+P (Mac: Cmd+P) เลือก บันทึกเป็น PDF ได้หน้าละสไลด์
@@ -193,5 +193,23 @@ td.n{white-space:nowrap}
     e.innerHTML='<span>00:00</span><span>'+mm(len)+'</span>';
     p.after(tl);tl.after(e);
   });
+  // หัวข้อและคำตอบตัวหนา: ตัดบรรทัดตรงเว้นวรรค วลีไหนยาวเกินบรรทัด ปล่อยตัดตามปกติ
+  deck.querySelectorAll('h1,h2,.facts b,.qa b').forEach(function(el){
+    var w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),t,L=[];
+    while(t=w.nextNode())if(!t.parentNode.closest('.nb'))L.push(t);
+    L.forEach(function(t){
+      var f=document.createDocumentFragment();
+      t.nodeValue.split(/(\s+(?!ๆ))/).forEach(function(x){
+        if(!x)return;
+        if(/^\s+$/.test(x)){f.appendChild(document.createTextNode(x));return}
+        var k=document.createElement('span');k.className='kp';k.textContent=x;f.appendChild(k)});
+      t.replaceWith(f)});
+  });
+  function fit(){
+    var K=deck.querySelectorAll('.kp');K.forEach(function(k){k.classList.add('nb')});
+    K.forEach(function(k){var box=k.closest('h1,h2')||k.closest('b').parentNode;
+      if(k.getBoundingClientRect().width>box.clientWidth+1)k.classList.remove('nb')});
+  }
+  fit();if(document.fonts)document.fonts.ready.then(fit);addEventListener('resize',fit);addEventListener('beforeprint',fit);
 })();
 </script>
