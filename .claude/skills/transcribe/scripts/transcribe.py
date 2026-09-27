@@ -61,7 +61,7 @@ def mmss(seconds):
 
 
 def team_names(path=TEAM_FILE):
-    """First cell of every markdown table row in core/team.md, minus header rows."""
+    """Leading cell of every markdown table row in core/team.md, minus header rows."""
     if not path.exists():
         return []
     names, lines = [], path.read_text(encoding="utf-8").splitlines()
