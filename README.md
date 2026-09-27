@@ -13,19 +13,24 @@
 1. เปิดโฟลเดอร์ว่างหนึ่งโฟลเดอร์ใน Claude Code
 2. วางลิงก์นี้ แล้วพิมพ์ว่า **ช่วยติดตั้งสมองนี้ให้หน่อย**
    `https://github.com/nomsodcaramel/claude-code-for-work-brain`
-3. ติดตั้งเสร็จ เปิด session ใหม่ในโฟลเดอร์เดิม
+3. ติดตั้งเสร็จ กด **+ New session** ในแถบซ้าย (Mac `Cmd+N` · Windows `Ctrl+N`) แล้วเลือกโฟลเดอร์เดิม
 4. ลองถาม: **งานนี้มีใครบ้าง ตัดสินใจอะไรไปแล้ว**
 5. ลองสั่ง: **/meeting-slide** กับ transcript ตัวอย่าง ได้สไลด์สรุปประชุมเป็นลิงก์
+6. หลังคลาส: อัดประชุมจริง แล้วใช้ **/transcribe** ถอดเป็น transcript บนเครื่องเรา ดู [docs/05](docs/05-record-to-slides.md)
 
 ## สำหรับ Claude: วิธีติดตั้ง
 
 - วางไฟล์ทั้งหมดของ repo นี้ไว้ที่ **โฟลเดอร์ที่เปิดอยู่ตอนนี้** ตรง ๆ ไม่ใช่ในโฟลเดอร์ย่อย
   (`CLAUDE.md` ต้องอยู่ที่ชั้นบนสุดของโฟลเดอร์ที่เปิด)
+- ก่อนเริ่ม ดูว่าโฟลเดอร์ว่างไหม มีแค่ `.DS_Store` ลบได้เลย
+  มีไฟล์อื่น หยุด บอกผู้ใช้ให้สร้างโฟลเดอร์ใหม่ชื่อ `claude-brain` แล้วเปิดโฟลเดอร์นั้นแทน ห้ามติดตั้งทับ
 - รวมโฟลเดอร์ซ่อน `.claude/skills/` ด้วย ห้ามข้าม
 - มี git: `git clone https://github.com/nomsodcaramel/claude-code-for-work-brain.git .`
-- ไม่มี git: ดาวน์โหลด `https://github.com/nomsodcaramel/claude-code-for-work-brain/archive/refs/heads/main.zip` แล้วแตกไฟล์ลงโฟลเดอร์นี้ (ย้ายไฟล์ออกจากโฟลเดอร์ย่อยที่ ZIP สร้าง ขึ้นมาไว้ชั้นบนสุด)
+- ไม่มี git หรือ Mac ขึ้นหน้าต่างให้ติดตั้ง developer tools: ดาวน์โหลด `https://github.com/nomsodcaramel/claude-code-for-work-brain/archive/refs/heads/main.zip` แล้วแตกไฟล์ลงโฟลเดอร์นี้ (ย้ายไฟล์ รวมโฟลเดอร์ซ่อน `.claude` ออกจากโฟลเดอร์ย่อยที่ ZIP สร้าง ขึ้นมาไว้ชั้นบนสุด)
 - ห้ามแก้ไฟล์ตอนติดตั้ง
-- เสร็จแล้วบอกผู้ใช้ให้เปิด session ใหม่ในโฟลเดอร์เดิม
+- ติดตั้งเสร็จ ตรวจว่ามี `CLAUDE.md` และ `.claude/skills/meeting-slide/SKILL.md` ที่ชั้นบนสุด
+  ใช้ทาง ZIP ลบ `main.zip` กับโฟลเดอร์ย่อยที่ว่างแล้วออก
+- เสร็จแล้วบอกผู้ใช้: กด **+ New session** ในแถบซ้าย (Mac `Cmd+N` · Windows `Ctrl+N`) แล้วเลือกโฟลเดอร์เดิม
 
 ## ข้างในมีอะไร
 
@@ -35,11 +40,13 @@ core/                     ทีมเรา · น้ำเสียงขอ�
 users/                    คนที่เราทำงานให้
 decision-log.md           ตัดสินอะไรไปแล้ว เพราะอะไร
 meetings/                 สรุปประชุมที่ /meeting-slide เขียนไว้
+recordings/               ไฟล์อัดประชุมของเรา อยู่บนเครื่องเท่านั้น (มีหลังใช้ครั้งแรก)
+transcripts/              transcript ที่ /transcribe ถอดจากไฟล์อัด (มีหลังใช้ครั้งแรก)
 slides/                   สไลด์ที่ /meeting-slide ทำ (มีหลังใช้ครั้งแรก)
 templates/slides.html     Template สไลด์
 sample/                   transcript ประชุม 35 นาที ตัวอย่างสมมติ
-.claude/skills/           /meeting-slide
-docs/                     คู่มือติดตั้ง Claude Code · ส่วนจำ · Connectors
+.claude/skills/           /meeting-slide · /transcribe
+docs/                     คู่มือติดตั้ง Claude Code · ส่วนจำ · Connectors · อัดประชุมเป็นสไลด์
 ```
 
-ลิงก์ Artifact บน Pro เป็นลิงก์สาธารณะ ก่อนส่งต่อ ตัดชื่อจริงและข้อมูลลูกค้าจริงออกเสมอ
+ลิงก์ Artifact ที่ทำใหม่เปิดได้แค่เรา จะส่งต่อต้องกด Share ให้เป็นลิงก์สาธารณะ ก่อนกด ตัดชื่อจริงและข้อมูลลูกค้าจริงออกเสมอ
