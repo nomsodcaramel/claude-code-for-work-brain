@@ -5,7 +5,8 @@
   2. เขียนเกณฑ์จาก "เอ๊ะ ก่อน" ไว้ในคอมเมนต์ข้างล่าง (บรรทัดของผู้ใช้ · ให้ใครดู · ต้องตอบอะไรบ้าง)
   3. หนึ่งหน้า = หนึ่งเรื่อง ไม่เกิน 8 หน้ารวมปก ใช้ได้ 4 แบบ: s-cover (ปก) · s-point (หนึ่งประเด็น) · s-table (ตาราง) · s-next (ปิด ขั้นต่อไป)
   4. <main> ใส่ data-len = ความยาวประชุม mm:ss (เวลาสุดท้ายใน transcript) ไม่รู้ ลบทิ้งได้
-  5. แถวบน .hd: ชื่อทีม · "สรุปประชุม <วันที่>" · เลขหน้า <span class="pgn"></span> ไว้เฉย ๆ หน้าเว็บนับให้เอง
+  5. แถวบน .hd: ชื่อทีมที่ประชุม · "สรุปประชุม <วันที่>" · เลขหน้า <span class="pgn"></span> ไว้เฉย ๆ หน้าเว็บนับให้เอง
+     ชื่อทีมที่ประชุม เอาจากหัว transcript (บรรทัด "ประชุมทีม…" และ "คนเข้า:") ใช้ชื่อทีมใน core/team.md ได้เมื่อคนเข้าประชุมเป็นคนในทีมนั้นเท่านั้น ไม่รู้ชื่อทีม ใส่หัวข้อประชุมแทน
   6. ปก: ซ้ายคือให้ใครดู + หัวเรื่อง ขวาคือ .qa หนึ่งแถวต่อหนึ่งข้อที่ผู้ใช้เลือกว่า "ต้องตอบ" (ไม่เกิน 4) · .q = คำถาม · <b> = คำตอบสั้น · ข้อที่ยังไม่ตัดสินใส่ class="wait"
   7. หน้าอื่น: .ask บอกคำถามที่หน้านี้ตอบ + สถานะ <span class="st">ตัดสินแล้ว</span> หรือ <span class="st wait">รอประกาศ</span>
   8. หัวข้อเป็นประโยคพูด มีกริยา ไม่เกิน 10 คำ ใส่ <em> ได้ 1 วลีต่อหน้า ที่วลีที่เป็นคำตอบ
@@ -129,7 +130,7 @@ td.n{white-space:nowrap}
 <main class="deck">
   <!-- ปก: ซ้าย ให้ใครดู + หัวเรื่องประโยคเดียว · ขวา ทุกข้อที่ต้องตอบ พร้อมคำตอบสั้น -->
   <section class="s s-cover" id="s1">
-    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="hd"><span class="team">ชื่อทีมที่ประชุม</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
     <div class="cv"><div>
     <p class="for">ให้ใครดู</p>
     <h1>หัวเรื่องเป็นประโยคเดียว <em>ที่คนดูอยากรู้</em></h1>
@@ -143,7 +144,7 @@ td.n{white-space:nowrap}
 
   <!-- หนึ่งประเด็น: คำถาม + สถานะ · ประโยคที่ตอบ · ไม่เกิน 3 ช่อง · ที่มา -->
   <section class="s s-point" id="s2">
-    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="hd"><span class="team">ชื่อทีมที่ประชุม</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
     <div class="ask"><span>คำถามข้อ 1</span><span class="st">ตัดสินแล้ว</span></div>
     <h2>หัวข้อเป็นประโยคที่ตอบคำถามนั้น <em>วลีที่เป็นคำตอบ</em></h2>
     <div class="facts">
@@ -156,7 +157,7 @@ td.n{white-space:nowrap}
 
   <!-- ตาราง: ใครทำอะไร เมื่อไร · td class="n" สำหรับวันหรือตัวเลข -->
   <section class="s s-table" id="s3">
-    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="hd"><span class="team">ชื่อทีมที่ประชุม</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
     <div class="ask"><span>ใครทำอะไร</span><span class="st">ตัดสินแล้ว</span></div>
     <h2>หัวข้อของตาราง</h2>
     <div class="tw"><table>
@@ -168,7 +169,7 @@ td.n{white-space:nowrap}
 
   <!-- ปิด: สิ่งเดียวที่อยากให้คนดูทำต่อ -->
   <section class="s s-next" id="s4">
-    <div class="hd"><span class="team">ทีมของเรา</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
+    <div class="hd"><span class="team">ชื่อทีมที่ประชุม</span><span>สรุปประชุม วันที่</span><span class="pgn"></span></div>
     <div class="ask"><span>ขั้นต่อไป</span></div>
     <h2>สิ่งเดียวที่อยากให้คนดูทำต่อ <em>วัน เวลา</em></h2>
     <p class="sub">ช่องทาง หรือคนที่ติดต่อได้</p>
